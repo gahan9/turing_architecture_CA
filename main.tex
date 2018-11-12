@@ -173,7 +173,7 @@ pdfproducer={Gahan Saraiya},
 %----------------------------------------------------------------------------------------
 %       BEGIN DOCUMENT
 %----------------------------------------------------------------------------------------
-
+\pgfplotsset{compat=1.15}
 \begin{document}
 \maketitle
 %\begin{frame}
@@ -183,21 +183,21 @@ pdfproducer={Gahan Saraiya},
 \section{Introduction}
 \begin{frame}[allowframebreaks]
 \frametitle{What is Turing Architecture?}
-\begin{itemize}
-	\item codename for a GPU microarchitecture developed by Nvidia
-	\item Successor of
-	    \href{https://en.wikipedia.org/wiki/Volta_(microarchitecture)}{Volta}
-	\item named after well known mathematician and computer scientist
-	    \href{https://en.wikipedia.org/wiki/Alan_Turing}{Alan Turing}
-	\item the first consumer product with capability of real-time \gls{ray-tracing}
-	\item NVIDIA partnered with Microsoft to enable full RTX support via
-	    \href{https://blogs.msdn.microsoft.com/directx/2018/03/19/announcing-microsoft-directx-raytracing/}{Microsoft’s new DirectX Raytracing (DXR) API}
-	\item TU102 GPU includes \textbf{18.6 billion transistors} fabricated on TSMC’s 12 nm FFN (FinFET NVIDIA) high-performance manufacturing process
-\end{itemize}
-\begin{figure}[H]
-	\includegraphics[width=240px]{refs/NVIDIA-Turing-Architecture-TU102}
-	\caption{Turing Architecture in TU102}
-\end{figure}
+    \begin{itemize}
+    	\item codename for a GPU microarchitecture developed by Nvidia
+    	\item Successor of
+    	    \href{https://en.wikipedia.org/wiki/Volta_(microarchitecture)}{Volta}
+    	\item named after well known mathematician and computer scientist
+    	    \href{https://en.wikipedia.org/wiki/Alan_Turing}{Alan Turing}
+    	\item the first consumer product with capability of real-time \gls{ray-tracing}
+    	\item NVIDIA partnered with Microsoft to enable full RTX support via
+    	    \href{https://blogs.msdn.microsoft.com/directx/2018/03/19/announcing-microsoft-directx-raytracing/}{Microsoft’s new DirectX Raytracing (DXR) API}
+    	\item TU102 GPU includes \textbf{18.6 billion transistors} fabricated on TSMC’s 12 nm FFN (FinFET NVIDIA) high-performance manufacturing process
+    \end{itemize}
+    \begin{figure}[H]
+    	\includegraphics[width=220px]{refs/NVIDIA-Turing-Architecture-TU102}
+    	\caption{Turing Architecture in TU102}
+    \end{figure}
 \end{frame}
 
 %	\usebackgroundtemplate{
@@ -205,193 +205,214 @@ pdfproducer={Gahan Saraiya},
 %		\includegraphics[width=\paperwidth,height=\paperheight]{refs/Nvidia-GeForce-RTX-2080-Ti-1}
 %		}
 %	} 
-\begin{frame}
-\frametitle{Overview of Product}
-\begin{table}[H]
-\vspace{-1cm}
-\hspace{-0.55cm}
-%			\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}}
-\begin{tabular}{ m{4cm} l }
-	{\begin{figure}[H]
-			\includegraphics[width=100px]{refs/geforce-rtx-2080-ti-web-tech-shot-630-u}
-			\caption{{\footnotesize RTX 2080 Ti}}
-	\end{figure}}
-	&
-	\makecell{ 
-		14.2 TFLOPS\footnote[1]{Based on GPU boost clock\label{note1}} of peak single precision (FP32)
-		\\ 113.8 Tensor TFLOPS
-		\\ 10 Giga Rays/sec
-		\\ 78 Tera RTX-OPS
-	}
-	\\
-	\vspace{-0.5cm}
-	{\begin{figure}[H]
-			\includegraphics[width=100px]{refs/pre-order-quadro-rtx-6000-front-badge-r2-407-d.jpg}
-			\caption{{\footnotesize QUADRO RTX 6000}}
-	\end{figure}}
-	&
-	\makecell{
-		16.3 TFLOPS\footnotemark[1] of peak single precision (FP32)
-		\\ 130.5 Tensor TFLOPS
-		\\ 10 Giga Rays/sec
-		\\ 84 Tera RTX-OPS
-	}
-\end{tabular}
-\end{table}
-\end{frame}
+    \begin{frame}
+    \frametitle{Overview of Product}
+        \begin{table}[H]
+        % \vspace{-1cm}
+        \hspace{-0.55cm}
+        %			\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}}
+        \begin{tabular}{ m{4cm} l }
+        	{\begin{figure}[H]
+        			\includegraphics[width=100px]{refs/geforce-rtx-2080-ti-web-tech-shot-630-u}
+        			\caption{{\footnotesize RTX 2080 Ti}}
+        	\end{figure}}
+        	&
+        	\makecell{ 
+        		14.2 TFLOPS\footnote[1]{Based on peak single precision of GPU boost clock\label{note1}} of FP32
+        		\\ 113.8 Tensor TFLOPS
+        		\\ 10 Giga Rays/sec
+        		\\ 78 Tera RTX-OPS
+        	}
+        	\\
+        	\vspace{-0.5cm}
+        	{\begin{figure}[H]
+        			\includegraphics[width=100px]{refs/pre-order-quadro-rtx-6000-front-badge-r2-407-d.jpg}
+        			\caption{{\footnotesize QUADRO RTX 6000}}
+        	\end{figure}}
+        	&
+        	\vspace{-0.5cm}
+        	\makecell{
+        		16.3 TFLOPS\footnotemark[1] of FP32
+        		\\ 130.5 Tensor TFLOPS
+        		\\ 10 Giga Rays/sec
+        		\\ 84 Tera RTX-OPS
+        	}
+        \end{tabular}
+        \end{table}
+    \end{frame}
 
 \section{Applications}
-\begin{frame}[allowframebreaks]
-\frametitle{Spectrum of QUADRO}
-\begin{block}{
-\begin{figure}[H]
-	\includegraphics[width=150px]{refs/quadro-design-vis-quadro-rtx-8000-625-u@2x.jpg}
-	\caption{{\footnotesize Quadro in Desktop Workstations}}
-\end{figure}
-}
-{
-Quadro has long been the \gls{de facto standard} for enterprise desktop graphics for digital designers and artists. With a range of performance, capabilities and price points, there is a right Quadro to go with the desktop workstation of your choice.
-}
-\end{block}
-\end{frame}
+    \begin{frame}[allowframebreaks]
+    \frametitle{Spectrum of QUADRO}
+        \begin{block}{
+            \begin{figure}[H]
+            	\includegraphics[width=150px]{refs/quadro-design-vis-quadro-rtx-8000-625-u@2x.jpg}
+            	\caption{{\footnotesize Quadro in Desktop Workstations}}
+            \end{figure}
+            }
+            {
+            Quadro has long been the \gls{de facto standard} for enterprise desktop graphics for digital designers and artists. With a range of performance, capabilities and price points, there is a right Quadro to go with the desktop workstation of your choice.
+            }
+        \end{block}
+        \begin{block}{
+            \begin{figure}[H]
+            	\includegraphics[width=150px]{refs/quadro-whats-new-feature-mobile-625-ud@2x.jpg}
+            	\caption{{\footnotesize Quadro in Mobile Workstation}}
+            \end{figure}
+            }
+            {
+                Quadro brings desktop-class performance to mobile workstations to enable incredibly powerful, thin and light form factors. Enjoy the ultimate creative freedom - tackle complex datasets with ease, render photorealistic images interactively and develop life-like VR experiences on-the-go.
+            }
+        \end{block}
+        \begin{block}{
+            \begin{figure}[H]
+            	\includegraphics[width=150px]{refs/design-vis-quadro-in-server-625-u@2x.jpg}
+            	\caption{{\footnotesize Quadro in Servers}}
+            \end{figure}
+            }
+            {
+                There are many complex visual computing workloads that require significantly higher levels of GPU horsepower for performance and efficiency. Quadro is available in industry-leading server solutions so you can scale-up from the desktop to the data center to meet your most demanding needs.
+            }
+        \end{block}
+        \begin{block}{
+            \begin{figure}[H]
+            	\includegraphics[width=150px]{refs/quadro-whats-new-feature-vdws-625-ud@2x.jpg}
+            	\caption{{\footnotesize Quadro in Virtual Workspaces}}
+            \end{figure}
+            }
+            {
+                Quadro Virtual Data Center Workstation (Quadro vDWS) provides creative and technical professionals with access from anywhere, and on any device while ensuring the proven performance of traditional Quadro solutions. Virtualized from the data center, the Quadro vDWS delivers a secure, immersive, agile workspace and supports the most demanding professional design and engineering applications.
+            }
+        \end{block}
+        \begin{block}{
+            \begin{figure}[H]
+            	\includegraphics[width=150px]{refs/quadro-whats-new-feature-specialty-625-ud@2x.jpg}
+            	\caption{{\footnotesize Quadro in Speciality Solutions}}
+            \end{figure}
+            }
+            {
+                Tap into the power of Quadro within innovative solutions that go beyond traditional desktop and mobile form factors. Tablets, backpacks and mini workstations with Quadro under the hood are ideal for professionals who desire full-size workstation performance and application compatibility in purpose-built solutions.
+            }
+        \end{block}
+
+
+    \end{frame}
 
 
 \section{Comparing with Predecessor}
-\begin{frame}[allowframebreaks]
-\frametitle{The New Features}
-\begin{block}{RT Cores for Real-Time Ray Tracing}
-{\small helps single GPU to render realistic \textbf{cinematic-quality 3D games, complex professional models} with accurate shadows, reflections, refractions.
-\\ The Turing architecture is armed with dedicated ray-tracing processors called RT Cores that accelerate the computation of how light and sound travel in 3D environments by up to 10 Giga Rays per second.}
-\end{block}
-\begin{block}{Tensor Cores for AI Acceleration}
-{\small Tensor Cores - processors that accelerate deep learning training and inference, providing up to \textbf{500 trillion tensor operations per second}.
-\\ This level of performance dramatically accelerates AI-enhanced features—such as denoising, resolution scaling, and video re-timing—creating applications with powerful new capabilities.}
-\end{block}
-\begin{block}{New Streaming Multiprocessor}
-{\small The Turing architecture dramatically improves raster performance over the previous-generation Pascal with an enhanced graphics pipeline and new programmable shading technologies (variable-rate shading, texture-space shading, and multi-view rendering).
-}
-\end{block}
-\begin{block}{CUDA For Simulation}
-{\small Turing-based GPUs feature a new streaming multiprocessor (SM) architecture that supports \textbf{up to 16 trillion floating-point operations} in parallel with 16 trillion integer operations per second. 
-\\ Developers can take advantage of up to 4,608 CUDA cores with NVIDIA CUDA 10, FleX, and PhysX software development kits (SDKs) to create complex simulations, such as particle or fluid dynamics for scientific visualization, virtual environments, and special effects.}
-\end{block}
-\end{frame}
+    \begin{frame}[allowframebreaks]
+    \frametitle{The New Features}
+        \begin{block}{RT Cores for Real-Time Ray Tracing}
+        {\small helps single GPU to render realistic \textbf{cinematic-quality 3D games, complex professional models} with accurate shadows, reflections, refractions.
+        \\ The Turing architecture is armed with dedicated ray-tracing processors called RT Cores that accelerate the computation of how light and sound travel in 3D environments by up to 10 Giga Rays per second.}
+        \end{block}
+        
+        \begin{block}{Tensor Cores for AI Acceleration}
+        {\small Tensor Cores - processors that accelerate deep learning training and inference, providing up to \textbf{500 trillion tensor operations per second}.
+        \\ This level of performance dramatically accelerates AI-enhanced features—such as denoising, resolution scaling, and video re-timing—creating applications with powerful new capabilities.}
+        \end{block}
+        
+        \begin{block}{New Streaming Multiprocessor}
+        {\small The Turing architecture dramatically improves raster performance over the previous-generation Pascal with an enhanced graphics pipeline and new programmable shading technologies (variable-rate shading, texture-space shading, and multi-view rendering).
+        }
+        \end{block}
+        
+        \begin{block}{CUDA For Simulation}
+        {\small Turing-based GPUs feature a new streaming multiprocessor (SM) architecture that supports \textbf{up to 16 trillion floating-point operations} in parallel with 16 trillion integer operations per second. 
+        \\ Developers can take advantage of up to 4,608 CUDA cores with NVIDIA CUDA 10, FleX, and PhysX software development kits (SDKs) to create complex simulations, such as particle or fluid dynamics for scientific visualization, virtual environments, and special effects.}
+        \end{block}
+    \end{frame}
 
-\begin{frame}
-\frametitle{Ray Tracing}
-Turing improves Ray tracing up to 6X compared to Volta
-\centering
-\begin{tikzpicture}[use background]
-\pgfplotstableread[row sep=\\]{ % Read the data into a table macro
-Label                                      		First   Second\\
-{PASCAL}										0     	308\\
-{DGX 4-VOLTAS RT}                               0     	55\\
-{TURING}                         				0     	45\\
-}\datatable
+    \begin{frame}
+    \frametitle{Ray Tracing}
+    Turing improves Ray tracing up to 6X compared to Volta
+    \centering
+        \begin{tikzpicture}[use background]
+            \pgfplotstableread[row sep=\\]{ % Read the data into a table macro
+            Label                                      		First   Second\\
+            {PASCAL}										0     	308\\
+            {DGX 4-VOLTAS RT}                               0     	55\\
+            {TURING}                         				0     	45\\
+            }
+            \datatable
+            \begin{axis}[
+                xbar stacked,   % Stacked horizontal bars
+                xmin=0,  xmax=350,       % Start x axis at 0
+                %				title={\large \textbf {Gantt Chart }},
+                height=3cm, width=8cm,
+                bar width=0.4cm,
+                axis x line*=bottom,
+                axis y line*=left,
+                y axis line style={opacity=1},
+                enlarge y limits=true,
+                xmajorgrids={true},
+                grid style={solid,ultra thin,gray},
+                tick style={tickwidth=0cm,major tick length=0cm},
+                xlabel={\textbf{rendering time in $ ms $}},
+                xtick ={50,308},
+                yticklabel style={font=\small\bfseries},
+                ytick=data,     % Use as many tick labels as y coordinates
+                yticklabels from table={\datatable}{Label}  % Get the labels from the Label column of the \datatable
+                ]
+                \addplot [draw=none,fill=blue] table [x=First, y expr=\coordindex] {\datatable};    % Plot the "First" column against the data index
+                \addplot [draw=none,fill=blue]table [x=Second, y expr=\coordindex] {\datatable};
+            \end{axis}
+        \end{tikzpicture}
+    \end{frame}
 
-\begin{axis}[
-xbar stacked,   % Stacked horizontal bars
-xmin=0,  xmax=350,       % Start x axis at 0
-%				title={\large \textbf {Gantt Chart }},
-height=3cm, width=10cm,
-bar width=0.4cm,
-axis x line*=bottom,
-axis y line*=left,
-y axis line style={opacity=1},
-enlarge y limits=true,
-xmajorgrids={true},
-grid style={
-solid,
-ultra thin,
-gray
-},
-tick style={tickwidth=0cm,major tick length=0cm},
-xlabel={\textbf{rendering time in $ ms $}},
-xtick ={50,308},
-yticklabel style={font=\small\bfseries},
-ytick=data,     % Use as many tick labels as y coordinates
-yticklabels from table={\datatable}{Label}  % Get the labels from the Label column of the \datatable
-]
-\addplot [draw=none,fill=blue] table [x=First, y expr=\coordindex] {\datatable};    % Plot the "First" column against the data index
-\addplot [draw=none,fill=blue]table [x=Second, y expr=\coordindex] {\datatable};
-\end{axis}
-\end{tikzpicture}
-\end{frame}
+    \begin{frame}[allowframebreaks]
+    \frametitle{Comparing Workstation GPU}
+    %			\def\arraystretch{1.5}
+        \begin{longtable}{c | l | l}
+            & \theadfont Quadro RTX 6000 & \theadfont Volta 100
+                \\ \hline
+            \makecell{CUDA Parallel-\\Processing Cores} & 4608 & 5120
+                \\ \hline
+            Architecture & Turing & Volta
+                \\ \hline
+            Code Name & TU102 & GV100
+                \\ \hline
+            Transistor count & 18,600 million & 21,100 million
+                \\ \hline
+            Transistors & 12nm & 12nm
+                \\ \hline
+            \makecell{Core \\clock speed} & 1440 MHz & 1132 MHz
+                \\ \hline
+            \makecell{Memory \\clock speed} & 12000 MHz & 1696 MHz
+                \\ \hline
+            \makecell{\gls{tensorcore}} & 576 & 640
+                \\ \hline
+            \makecell{\gls{rtcore}} & 72 & -
+                \\ \hline		
+            GPU Memory & 24 GB GDDR6 & 32 GB HBM2
+                \\ \hline
+            \gls{ray-tracing} & 84T & -
+                \\ \hline
+            \gls{ray-tracing} & 10 Giga Rays/Sec & -
+                \\ \hline
+            \makecell{FP32 \\Performance} & 16.3 TFLOPS & 14.8 TFLOPS
+                \\ \hline
+            \makecell{Tensor \\Performance} & 16.3 TFLOPS & 130.5 TFLOPS
+                \\ \hline
+            \makecell{Max Power \\Consumption} & 295 W & 250 W
+                \\ \hline
+            Graphics Bus & PCI Express 3.0 x 16 & PCI Express 3.0 x 16
+                \\ \hline
+            \makecell{Display \\Connectors} & \makecell{DP 1.4 (4),\\ VirtualLink (1)} & \makecell{DP 1.4 (4)}
+                \\ \hline
+            Form Factor & \makecell{4.4" H $\times$ 10.5" L\\ Dual Slot} & \makecell{4.4" H $\times$ 10.5" L \\Dual Slot}
+                \\ \hline
+            Release date & 13 August 2018 & 27 March 2018
+                \\ \hline
+            Launch Price & \$6299 & \$8999
+        \end{longtable}
+    \end{frame}
 
-\begin{frame}[allowframebreaks]
-\frametitle{Comparing Workstation GPU}
-
-%			\def\arraystretch{1.5}
-\begin{longtable}{c | l | l}
-& \theadfont Quadro RTX 6000 & \theadfont Volta 100
-\\
-\hline
-\makecell{CUDA Parallel-\\Processing Cores} & 4608 & 5120
-\\
-\hline
-Architecture & Turing & Volta
-\\
-\hline
-Code Name & TU102 & GV100
-\\
-\hline
-Transistor count & 18,600 million & 21,100 million
-\\
-\hline
-Transistors & 12nm & 12nm
-\\
-\hline
-\makecell{Core \\clock speed} & 1440 MHz & 1132 MHz
-\\
-\hline
-\makecell{Memory \\clock speed} & 12000 MHz & 1696 MHz
-\\
-\hline
-\makecell{\Gls{tensorcore}} & 576 & 640
-\\
-\hline
-\makecell{\gls{rtcore}} & 72 & -
-\\
-\hline		
-GPU Memory & 24 GB GDDR6 & 32 GB HBM2
-\\
-\hline
-\gls{ray-tracing} & 84T & -
-\\
-\hline
-\gls{ray-tracing} & 10 Giga Rays/Sec & -
-\\
-\hline
-\makecell{FP32 \\Performance} & 16.3 TFLOPS & 14.8 TFLOPS
-\\
-\hline
-\makecell{Tensor \\Performance} & 16.3 TFLOPS & 130.5 TFLOPS
-\\
-\hline
-\makecell{Max Power \\Consumption} & 295 W & 250 W
-\\
-\hline
-Graphics Bus & PCI Express 3.0 x 16 & PCI Express 3.0 x 16
-\\
-\hline
-\makecell{Display \\Connectors} & \makecell{DP 1.4 (4),\\ VirtualLink (1)} & \makecell{DP 1.4 (4)}
-\\
-\hline
-Form Factor & \makecell{4.4" H $\times$ 10.5" L\\ Dual Slot} & \makecell{4.4" H $\times$ 10.5" L \\Dual Slot}
-\\
-\hline
-Release date & 13 August 2018 & 27 March 2018
-\\
-\hline
-Launch Price & \$6299 & \$8999
-\end{longtable}
-\end{frame}
-
-\begin{frame}
-\begin{figure}[H]
-\includegraphics[width=270px]{refs/NVIDIA-RTX-Turing-GPU_19-1}
-\end{figure}
-\end{frame}
+    \begin{frame}
+        \begin{figure}[H]
+            \includegraphics[width=270px]{refs/NVIDIA-RTX-Turing-GPU_19-1}
+        \end{figure}
+    \end{frame}
 
 \section{In to the Architecture}
     \begin{frame}[allowframebreaks]
@@ -410,7 +431,7 @@ Launch Price & \$6299 & \$8999
     \end{frame}
 
 \section{Terminologies}
-    \begin{frame}
+    \begin{frame}[allowframebreaks]
     \frametitle{Glossaries}
         \printglossaries
     \end{frame}
