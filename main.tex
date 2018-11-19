@@ -111,6 +111,15 @@
 	}
 }
 
+% *** FLOWCHART AND GRAPHS PACKAGES ***
+%
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes, shapes.geometric, calc, automata,positioning}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, trapezium stretches=true, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, trapezium stretches=true, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, trapezium stretches=true, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, trapezium stretches=true, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 %----------------------------------------------------------------------------------------
 %       CUSTOMIZE BEAMER FOOTER
 %----------------------------------------------------------------------------------------
@@ -309,7 +318,8 @@ pdfproducer={Gahan Saraiya},
     \frametitle{The New Features}
         \begin{block}{RT Cores for Real-Time Ray Tracing}
         {\small helps single GPU to render realistic \textbf{cinematic-quality 3D games, complex professional models} with accurate shadows, reflections, refractions.
-        \\ The Turing architecture is armed with dedicated ray-tracing processors called RT Cores that accelerate the computation of how light and sound travel in 3D environments by up to 10 Giga Rays per second.}
+        \\ The Turing architecture is armed with dedicated ray-tracing processors called RT Cores that accelerate the computation of how light and sound travel in 3D environments by up to 10 Giga Rays per second.
+        \\ \href{https://www.youtube.com/watch?v=LXo0WdlELJk}{EA Project PICA real-time ray tracing demo running on NVIDIA RTX}}
         \end{block}
         
         \begin{block}{Tensor Cores for AI Acceleration}
@@ -328,7 +338,7 @@ pdfproducer={Gahan Saraiya},
         \end{block}
     \end{frame}
 
-    \begin{frame}
+    \begin{frame}[allowframebreaks]
     \frametitle{Ray Tracing}
     Turing improves Ray tracing up to 6X compared to Volta
     \centering
@@ -363,6 +373,58 @@ pdfproducer={Gahan Saraiya},
                 \addplot [draw=none,fill=blue]table [x=Second, y expr=\coordindex] {\datatable};
             \end{axis}
         \end{tikzpicture}
+        
+        \begin{figure}
+            \centering
+            	\begin{tikzpicture}[>=latex',line join=bevel, node distance=1.6cm, scale=0.5, every node/.style={transform shape}]
+		            \node (start) [startstop] {Start};
+		            \node (rayGeneration) [process, below of=start] 
+			            {Ray generation};
+		            \node (sceneErgodicity) [process, below of=rayGeneration] 
+			            {Scene Ergodicity};
+			        \node (intersect) [decision, below of=sceneErgodicity, yshift=-0.5cm, aspect=3]
+			            {Modeling intersection};
+		            \node (rendering) [process, below of=intersect, yshift=-0.7cm, aspect=3]
+			            {Rendering and ray derivation};
+		            \node (sceneGeneration) [process, below of=rendering, yshift=-0.5cm, aspect=3]
+			            {Scene generation};
+		            \node (stop) [startstop, below of=sceneGeneration] {Stop};
+			        \draw [arrow] (start) -- (rayGeneration);
+			        \draw [arrow] (rayGeneration) -- (sceneErgodicity);
+			        \draw [arrow] (sceneErgodicity) -- (intersect);
+			        \draw [arrow] (intersect.east) node[above right]{no} -- ++ (1,0) |- ($(rayGeneration)!0.5!(sceneErgodicity)$);
+			        \draw [arrow] (intersect) -- node[anchor=east] {yes} (rendering);
+			        \draw [arrow] (rendering) -- (sceneGeneration);
+			        \draw [arrow] (sceneGeneration) -- (stop);
+	            \end{tikzpicture}
+            \caption{Ray Tracing Base Flow}
+            \label{fig:rayTracingFlow}
+        \end{figure}
+        
+        \begin{itemize}
+            \item Establish 2-D \textit{kd-tree} structure to store scene information.
+            Each node in tree stands for axis-aligned bounding box and every inner node represents separation plane which divides the scene into two sub-regions
+            \item change the order clue into threaded binary-tree before calculating intersection and ergodicity.
+            \item if the ray's span crosses two sides of the separation axles, that ray goes through two second-level boxes at the same time so we will first calculate its intersection with the first child node.
+            \item if that node is a leaf node, and the reflection has intersection with that node, the result will be a success. Otherwise, successor nodes of that node will be searched directly.
+            
+            \begin{equation}
+                C(n) = \sum_{j=1}^{n}M_j(\Pi_{i=1}^{j=1}r_i)(1-r_i)
+                \caption{The function of rendering and ray derivation is to figure out the color value}
+            \end{equation}
+            \paragraph{C(n)} final color of pixel
+            \paragraph{M_j} model j
+            \paragraph{r_i} reflection coefficient of object i
+            
+        \end{itemize}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[height=190px]{refs/raytrace_01-625x630.png}
+            \caption{Ray Tracing Pipeline}
+            \label{fig:rayTracingFlow}
+        \end{figure}
+        
     \end{frame}
 
     \begin{frame}[allowframebreaks]
