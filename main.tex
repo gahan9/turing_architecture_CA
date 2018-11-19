@@ -407,22 +407,24 @@ pdfproducer={Gahan Saraiya},
             \item change the order clue into threaded binary-tree before calculating intersection and ergodicity.
             \item if the ray's span crosses two sides of the separation axles, that ray goes through two second-level boxes at the same time so we will first calculate its intersection with the first child node.
             \item if that node is a leaf node, and the reflection has intersection with that node, the result will be a success. Otherwise, successor nodes of that node will be searched directly.
-            
-            \begin{equation}
-                C(n) = \sum_{j=1}^{n}M_j(\Pi_{i=1}^{j=1}r_i)(1-r_i)
-                \caption{The function of rendering and ray derivation is to figure out the color value}
-            \end{equation}
-            \paragraph{C(n)} final color of pixel
-            \paragraph{M_j} model j
-            \paragraph{r_i} reflection coefficient of object i
-            
         \end{itemize}
         
+        \newpage
+        \begin{equation}
+            C(n) = \sum_{j=1}^{n}M_j(\Pi_{i=1}^{j=1}r_i)(1-r_i)
+        \end{equation}
+        
+        $C(n)$ final color of pixel - The function of rendering and ray derivation is to figure out the color value
+        \\    
+        $M_j$ model j
+        \\
+        $r_i$ reflection coefficient of object i
+                
         \begin{figure}
             \centering
-            \includegraphics[height=190px]{refs/raytrace_01-625x630.png}
+            \includegraphics[height=180px]{refs/raytrace_01-625x630.png}
             \caption{Ray Tracing Pipeline}
-            \label{fig:rayTracingFlow}
+            \label{fig:rayTracingFlownVidia}
         \end{figure}
         
     \end{frame}
