@@ -80,15 +80,10 @@
 	bgcolor=LightGray,
 	%	fontsize=\small
 }
-
-\setminted[python]{
-	frame=lines, 
-	breaklines, 
-	linenos,
-	baselinestretch=1.2,
-	%	bgcolor=LightGray,
-	%	fontsize=\small
-}
+%----------------------------------------------------------------------------------------
+%       Video Stuff
+%----------------------------------------------------------------------------------------
+\usepackage{media9}
 %----------------------------------------------------------------------------------------
 %       GRAPH PLOTING CONFIG
 %----------------------------------------------------------------------------------------
@@ -314,6 +309,17 @@ pdfproducer={Gahan Saraiya},
 
 
 \section{Comparing with Predecessor}
+    \begin{frame}{Overview the New}
+        \begin{itemize}
+            \item New RT (Ray Tracing) Core per SM
+            \item Turing SM Architecture (streaming multi-processor design that delivers greater processing efficiency)
+            \item Dynamic Parallelism (GPU dynamically spawns new threads without going back to the CPU)
+            \item Mixed-precision (1-, 4-, 8-, 16-, 32- and 64-bit) computing
+            \item Error correction codes (ECC) on graphics memory
+            \item Configurable up to 96 KB of RAM (dedicated shared memory size per SM)
+        \end{itemize}
+    \end{frame}
+    
     \begin{frame}[allowframebreaks]
     \frametitle{The New Features}
         \begin{block}{RT Cores for Real-Time Ray Tracing}
@@ -445,9 +451,15 @@ pdfproducer={Gahan Saraiya},
                 \\ \hline
             Transistors & 12nm & 12nm
                 \\ \hline
-            \makecell{Core \\clock speed} & 1440 MHz & 1132 MHz
+            \makecell{SMs} & 72 & 80
+                \\ \hline
+            \makecell{GPU Base \\clock speed} & 1440 MHz & 1132 MHz
+                \\ \hline
+            \makecell{GPU Boost \\Clock speed} & 1770 MHz & 1530 MHz
                 \\ \hline
             \makecell{Memory \\clock speed} & 12000 MHz & 1696 MHz
+                \\ \hline
+            \makecell{Memory \\Bandwidth} & 624 GB/s & 870 GB/s
                 \\ \hline
             \makecell{\gls{tensorcore}} & 576 & 640
                 \\ \hline
@@ -455,13 +467,13 @@ pdfproducer={Gahan Saraiya},
                 \\ \hline		
             GPU Memory & 24 GB GDDR6 & 32 GB HBM2
                 \\ \hline
-            \gls{ray-tracing} & 84T & -
+            RTX-OPS & 84 Tera-OPS & -
                 \\ \hline
-            \gls{ray-tracing} & 10 Giga Rays/Sec & -
+            Rays Cast & 10 Giga Rays/Sec & -
                 \\ \hline
             \makecell{FP32 \\Performance} & 16.3 TFLOPS & 14.8 TFLOPS
                 \\ \hline
-            \makecell{Tensor \\Performance} & 16.3 TFLOPS & 130.5 TFLOPS
+            \makecell{Tensor \\Performance\footnote{FP16 matrix multiply with FP16 and FP32 accumulate}} & 130.5 TFLOPS & 118.5 TFLOPS
                 \\ \hline
             \makecell{Max Power \\Consumption} & 295 W & 250 W
                 \\ \hline
@@ -493,9 +505,17 @@ pdfproducer={Gahan Saraiya},
             
             \item however it's predecessor Nvidia V100 GPU (Volta) having first-generation Tensor Cores can only deliver performance with mixed-precision matrix multiply in FP16 (12X compare to PASCAL) and FP32(6X compare to PASCAL)
         \end{itemize}
+        
         \begin{figure}[H]
-        \includegraphics[width=270px]{refs/turing-throughput-tensor.jpg}
-        \caption{Turing Tensor core throughput comparison}
+            \includegraphics[width=270px]{refs/turing-throughput-tensor.jpg}
+            \caption{Turing Tensor core throughput comparison}
+        \end{figure}
+        
+        \begin{figure}
+            \centering
+            \includegraphics[width=270px]{image3.jpg}
+            \caption{New Shared Memory Architecture}
+            \label{fig:newSM}
         \end{figure}
     \end{frame}
 
